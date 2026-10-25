@@ -1,0 +1,11 @@
+:root { --bs-body-color: #213d48; --bs-link-color: #176f70; }
+body { font-feature-settings: "ss01"; }
+.navbar { border-bottom: 1px solid #dbe8e5; }
+.navbar-brand { font-weight: 750; letter-spacing: -.035em; }
+main h1 { letter-spacing: -.04em; font-weight: 750; }
+main h2 { margin-top: 2rem; letter-spacing: -.025em; }
+main img { max-width: 100%; height: auto; }
+pre { border: 1px solid #dbe8e5; border-radius: .6rem; }
+.table { font-size: .95rem; }
+footer { border-top: 1px solid #dbe8e5; }
+@media(max-width:600px) { main h1 { font-size: 2rem; } pre { font-size: .78rem; } }

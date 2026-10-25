@@ -1,0 +1,5 @@
+useDynLib(scaleCorrection, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+export(corrected_pair)
+export(variance_folds)
+export(estimate_variance)

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="480" viewBox="0 0 1440 480" role="img" aria-labelledby="title desc">
+<title id="title">softridge and scaleCorrection</title><desc id="desc">Soft thresholding and corrected scaling for ridge regression. The line is a schematic threshold operator, not simulation results.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#122d3d"/><stop offset="1" stop-color="#164c52"/></linearGradient></defs>
+<rect width="1440" height="480" rx="26" fill="url(#bg)"/>
+<g stroke="#ffffff" stroke-opacity=".07"><path d="M0 120H1440M0 240H1440M0 360H1440M120 0V480M360 0V480M600 0V480M840 0V480M1080 0V480M1320 0V480"/></g>
+<text x="76" y="96" fill="#a7dcce" font-family="Arial,sans-serif" font-size="19" letter-spacing="4">TWO PACKAGES · ONE RESEARCH TOOLKIT</text>
+<text x="72" y="204" fill="white" font-family="Arial,sans-serif" font-size="86" font-weight="700">softridge</text>
+<text x="76" y="264" fill="#c2e5df" font-family="Arial,sans-serif" font-size="32">Soft thresholding. Explicit ridge geometry.</text>
+<text x="76" y="324" fill="#c2e5df" font-family="Arial,sans-serif" font-size="25">with scaleCorrection for optimism-corrected scaling</text>
+<rect x="76" y="372" width="230" height="43" rx="21" fill="#d9f1e6"/><text x="101" y="400" fill="#173d45" font-family="Arial,sans-serif" font-size="19">R + RcppArmadillo</text>
+<g transform="translate(1130 236)"><path d="M-172 0H172M0-145V145" stroke="#9dccc6" stroke-width="2" opacity=".55"/>
+<path d="M-150 110L-47 0H47L150-110" fill="none" stroke="#e4b982" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="-47" cy="0" r="7" fill="#fff"/><circle cx="47" cy="0" r="7" fill="#fff"/>
+<text x="-78" y="176" fill="#d3ebe4" font-family="Arial,sans-serif" font-size="18">soft threshold</text></g></svg>

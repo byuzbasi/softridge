@@ -1,0 +1,12 @@
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
+*.o
+*.so
+*.dll
+*.Rcheck/
+.r-libraries/
+reproduction/runs/
+reproduction/reference22/data/
+companion/scaleCorrection/docs/

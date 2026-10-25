@@ -1,0 +1,20 @@
+url: https://byuzbasi.github.io/softridge/scaleCorrection/
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#176f70"
+development:
+  mode: release
+home:
+  title: "scaleCorrection · Corrected ridge scaling"
+navbar:
+  structure:
+    left: [toolkit, reference]
+    right: [search, github]
+  components:
+    toolkit:
+      text: Back to softridge
+      href: https://byuzbasi.github.io/softridge/
+reference:
+- title: Corrected scaling and matched Ridge control
+  contents: [corrected_pair]

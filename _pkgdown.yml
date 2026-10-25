@@ -1,0 +1,44 @@
+url: https://byuzbasi.github.io/softridge/
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#176f70"
+    border-radius: "0.5rem"
+development:
+  mode: release
+home:
+  title: "softridge · Soft-thresholded ridge"
+  description: "RcppArmadillo tools for soft-thresholded ridge, fixed-parameter risk and SURE, with the scaleCorrection companion."
+navbar:
+  structure:
+    left: [intro, reference, articles, companion, news]
+    right: [search, github]
+  components:
+    intro:
+      text: Get started
+      href: articles/getting-started.html
+    companion:
+      text: scaleCorrection
+      href: scaleCorrection/index.html
+    articles:
+      text: Guides
+      menu:
+      - text: Getting started
+        href: articles/getting-started.html
+      - text: Corrected scaling
+        href: articles/scaling.html
+      - text: Risk and target definitions
+        href: articles/risk-and-targets.html
+      - text: Reproduce the studies
+        href: articles/reproduction.html
+reference:
+- title: Fit STR and choose tuning parameters
+  contents: [hr, cv_hr, hr_grid]
+- title: Fixed-parameter risk and SURE
+  contents: [hr_risk, hr_sure, sure_hr]
+- title: Threshold and ridge primitives
+  contents: [soft_threshold, ridge_path]
+articles:
+- title: Guides
+  navbar: ~
+  contents: [getting-started, scaling, risk-and-targets, reproduction, softridge]

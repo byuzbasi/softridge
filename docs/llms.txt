@@ -1,0 +1,181 @@
+# Soft-thresholded ridge, from theory to reproducible code
+
+![softridge and scaleCorrection: soft thresholding and corrected
+scaling](reference/figures/banner.svg)
+
+**softridge** fits soft-thresholded ridge (STR), computes
+fixed-parameter Gaussian risk and SURE, and supports cross-validation
+and least-squares refitting. Its **scaleCorrection** companion fits
+optimism-corrected scaled STR (SSTR) alongside a matched Ridge-c0
+control. Numerical kernels use **RcppArmadillo**.
+
+[Get
+started](https://byuzbasi.github.io/softridge/articles/getting-started.html)
+· [Function
+reference](https://byuzbasi.github.io/softridge/reference/index.html) ·
+[Scaling
+companion](https://byuzbasi.github.io/softridge/scaleCorrection/) ·
+[Reproduce the
+studies](https://byuzbasi.github.io/softridge/articles/reproduction.html)
+
+## Two packages, complementary roles
+
+| Package | Purpose | Entry points |
+|:---|:---|:---|
+| softridge | STR fitting, fixed-tuning risk and SURE, CV, LS refitting | [`hr()`](https://byuzbasi.github.io/softridge/reference/hr.md), [`cv_hr()`](https://byuzbasi.github.io/softridge/reference/cv_hr.md), [`hr_risk()`](https://byuzbasi.github.io/softridge/reference/hr_risk.md), [`hr_sure()`](https://byuzbasi.github.io/softridge/reference/hr_sure.md) |
+| scaleCorrection | Corrected SSTR and matched Ridge-c0 tuning on a shared CV surface | `corrected_pair()` |
+
+The manuscript calls the estimators **STR** and **SSTR**. Historical
+function names such as
+[`hr()`](https://byuzbasi.github.io/softridge/reference/hr.md) are
+retained for compatibility. `scale = TRUE` in
+[`hr()`](https://byuzbasi.github.io/softridge/reference/hr.md) or
+[`cv_hr()`](https://byuzbasi.github.io/softridge/reference/cv_hr.md)
+requests the earlier training LS scale (**SSTR-LS**); the corrected SSTR
+is obtained from
+[`scaleCorrection::corrected_pair()`](https://rdrr.io/pkg/scaleCorrection/man/corrected_pair.html).
+
+## Install from GitHub
+
+R, a working C++17 toolchain, and the declared package dependencies are
+required. Install `remotes` separately if it is not already available,
+then run:
+
+``` r
+
+remotes::install_github("byuzbasi/softridge", upgrade = "never")
+remotes::install_github("byuzbasi/softridge", subdir = "companion/scaleCorrection",
+                        upgrade = "never")
+```
+
+These are GitHub research packages; no CRAN availability is claimed.
+Dependency lists and recorded study environments are documented in the
+guides.
+
+## A small STR fit
+
+``` r
+
+library(softridge)
+set.seed(25)
+X <- matrix(rnorm(60 * 100), 60, 100)
+beta <- c(2, -1.5, 1, rep(0, 97))
+y <- drop(X %*% beta + rnorm(60))
+foldid <- rep(1:3, length.out = 60)
+grid <- hr_grid(X, y, nk = 3, ng = 5)
+fit <- cv_hr(X, y, grid = grid, foldid = foldid)
+head(fit$coef)
+```
+
+This is a software demonstration, not a simulation performance result.
+The [scaling
+guide](https://byuzbasi.github.io/softridge/articles/scaling.html) shows
+the corrected SSTR and its matched Ridge control using the same
+observations.
+
+## Example gallery
+
+[Threshold
+geometry](https://byuzbasi.github.io/softridge/articles/getting-started.html#threshold-geometry)
+and a [fixed-design exact-risk
+curve](https://byuzbasi.github.io/softridge/articles/risk-and-targets.html#a-fixed-design-analytic-illustration)
+are analytic software demonstrations with their seeds and source code
+stated.
+
+## What the theory computes
+
+[`hr_risk()`](https://byuzbasi.github.io/softridge/reference/hr_risk.md)
+evaluates coefficient risk for the estimable projection under a fixed
+Gaussian design model.
+[`hr_sure()`](https://byuzbasi.github.io/softridge/reference/hr_sure.md)
+evaluates fixed-design prediction risk with fixed tuning and known error
+variance. New-covariate prediction and recovery of the original
+coefficient support are distinct objectives. The corrected fitted scale
+and data-adaptive tuning are assessed empirically; the fixed-parameter
+unbiasedness formulas do not extend automatically to them.
+
+## Reproduction materials
+
+[`reproduction/`](https://byuzbasi.github.io/softridge/reproduction/)
+contains source packages, frozen designs/seeds and portable runners for
+the separately reported **22-setting reference study** and
+**192-scenario independent study**. The reference uses the original R
+`softridge` 0.4.0; the independent study uses RcppArmadillo `softridge`
+0.3.0.1 and `scaleCorrection` 0.1.0. Their CV protocols differ and are
+not pooled. Original archives are retained byte for byte in separate
+library workflows.
+
+``` sh
+cd reproduction
+python3 verify_sources.py
+Rscript --vanilla RUNME.R --help
+```
+
+No full study runs automatically. Downloading real data and starting a
+full numerical rerun both require explicit commands. Saved result tables
+and manuscript PDFs are distributed separately from this software
+repository.
+
+## Citation and authorship
+
+Software: Mohammad Arashi and Bahadir Yuzbasi. See
+[`CITATION.cff`](https://byuzbasi.github.io/softridge/CITATION.cff) and
+`citation("softridge")` / `citation("scaleCorrection")`.
+
+Companion manuscript: Bahadir Yuzbasi and Mohammad Arashi,
+*Soft-thresholded ridge estimation of an estimable projection*,
+unpublished manuscript (2026). No journal acceptance or DOI is claimed.
+
+## Development and validation
+
+See [VALIDATION.md](https://byuzbasi.github.io/softridge/VALIDATION.md),
+[CONTRIBUTING.md](https://byuzbasi.github.io/softridge/CONTRIBUTING.md),
+and [release notes](https://byuzbasi.github.io/softridge/NEWS.md).
+Report reproducible problems through [GitHub
+issues](https://github.com/byuzbasi/softridge/issues). Both packages use
+GPL (\>= 2); original authorship is preserved.
+
+# Package index
+
+## Fit STR and choose tuning parameters
+
+- [`hr()`](https://byuzbasi.github.io/softridge/reference/hr.md)
+  [`coef(`*`<hr>`*`)`](https://byuzbasi.github.io/softridge/reference/hr.md)
+  [`predict(`*`<hr>`*`)`](https://byuzbasi.github.io/softridge/reference/hr.md)
+  : Soft-thresholded ridge (STR) estimator
+- [`cv_hr()`](https://byuzbasi.github.io/softridge/reference/cv_hr.md) :
+  Cross-validated STR estimator
+- [`hr_grid()`](https://byuzbasi.github.io/softridge/reference/hr_grid.md)
+  : Default tuning grids for the STR estimator
+
+## Fixed-parameter risk and SURE
+
+- [`hr_risk()`](https://byuzbasi.github.io/softridge/reference/hr_risk.md)
+  : Exact finite-sample moments and risk of the STR estimator
+- [`hr_sure()`](https://byuzbasi.github.io/softridge/reference/hr_sure.md)
+  : Stein unbiased risk estimate and degrees of freedom of the STR fit
+- [`sure_hr()`](https://byuzbasi.github.io/softridge/reference/sure_hr.md)
+  : STR estimator tuned by the Stein unbiased risk estimate
+
+## Threshold and ridge primitives
+
+- [`soft_threshold()`](https://byuzbasi.github.io/softridge/reference/soft_threshold.md)
+  : Soft-thresholding operator
+- [`ridge_path()`](https://byuzbasi.github.io/softridge/reference/ridge_path.md)
+  : Ridge regression path computed through the singular value
+  decomposition
+
+# Articles
+
+### Guides
+
+- [Getting started: two packages, one
+  toolkit](https://byuzbasi.github.io/softridge/articles/getting-started.md):
+- [Corrected SSTR and the matched Ridge
+  control](https://byuzbasi.github.io/softridge/articles/scaling.md):
+- [Risk, prediction and selection answer different
+  questions](https://byuzbasi.github.io/softridge/articles/risk-and-targets.md):
+- [Reproduce the reference and independent
+  studies](https://byuzbasi.github.io/softridge/articles/reproduction.md):
+- [Soft-thresholded ridge regression with
+  softridge](https://byuzbasi.github.io/softridge/articles/softridge.md):

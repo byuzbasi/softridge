@@ -1,0 +1,34 @@
+Package: softridge
+Type: Package
+Title: High-Dimensional Ridge Shrinkage and Selection by Soft
+        Thresholding
+Version: 0.3.0.1
+Authors@R: c(
+    person("Mohammad", "Arashi", email = "mohammad.arashi@up.ac.za",
+           role = c("aut", "cre")),
+    person("Bahadir", "Yuzbasi", role = "aut"))
+Description: Implements the soft-thresholded ridge estimator for linear
+    regression with more predictors than observations. The estimator has an
+    explicit form computed through one singular value decomposition. The
+    package provides the exact finite-sample risk under Gaussian errors, the
+    Stein unbiased risk estimate with closed-form degrees of freedom, and
+    training least-squares rescaling, fixed-scale risk and SURE, and
+    tuning by cross-validation or by the unbiased risk estimate. Numerical
+    kernels use RcppArmadillo; R interfaces retain the original tuning rules.
+    This frozen research build adds internal AR(1) design utilities without
+    changing the estimator kernels.
+License: GPL (>= 2)
+Encoding: UTF-8
+Imports: stats, Rcpp
+LinkingTo: Rcpp, RcppArmadillo
+SystemRequirements: C++17
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+RoxygenNote: 7.3.3
+NeedsCompilation: yes
+Author: Mohammad Arashi [aut, cre],
+  Bahadir Yuzbasi [aut]
+Maintainer: Mohammad Arashi <mohammad.arashi@up.ac.za>
+URL: https://byuzbasi.github.io/softridge/, https://github.com/byuzbasi/softridge
+BugReports: https://github.com/byuzbasi/softridge/issues

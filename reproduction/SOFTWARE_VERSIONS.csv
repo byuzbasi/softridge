@@ -1,0 +1,17 @@
+study,component,recorded_version,role
+reference22,R,4.3.3,reported numerical environment
+reference22,softridge,0.4.0,supplied reference source archive
+reference22,glmnet,4.1-8,reported comparator environment
+reference22,ncvreg,3.16.0.7,reported comparator environment
+reference22,mltools,0.3.5,final MCC reporting convention
+reference22,hdi,0.1-8,data source only; installation unnecessary
+independent192,R,4.3.0,completed numerical environment
+independent192,softridge,0.3.0.1,supplied RcppArmadillo source
+independent192,scaleCorrection,0.1.0,supplied RcppArmadillo extension
+independent192,Rcpp,1.1.1.1.1,completed numerical environment
+independent192,RcppArmadillo,15.2.6.1,completed numerical environment
+independent192,glmnet,5.0,completed numerical environment
+independent192,ncvreg,3.16.0,completed numerical environment
+independent192,mltools,0.3.5,native MCC
+independent192,digest,0.6.35,scientific signatures
+independent192,jsonlite,2.0.0,metadata

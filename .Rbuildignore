@@ -1,0 +1,13 @@
+^\.git$
+^\.github$
+^\.gitignore$
+^_pkgdown\.yml$
+^docs$
+^companion$
+^reproduction$
+^tools$
+^CITATION\.cff$
+^CONTRIBUTING\.md$
+^VALIDATION\.md$
+^LICENSE\.md$
+^README\.Rmd$

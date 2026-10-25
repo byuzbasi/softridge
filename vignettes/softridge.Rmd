@@ -1,0 +1,62 @@
+---
+title: "Soft-thresholded ridge regression with softridge"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Soft-thresholded ridge regression with softridge}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Version 0.3.0 implements the SVD, ridge path, soft-thresholding, exact Gaussian
+risk, SURE surfaces, and cross-validation/refit scoring in RcppArmadillo.
+The public R interfaces and statistical tuning rules are retained. Native kernels
+do not draw random numbers; fold generation remains in R. The relative singular
+value cutoff remains `1e-10`. OpenMP is disabled in the package kernels.
+
+Numerical equivalence to the archived R implementation is tested to a tolerance
+of `1e-8`; floating-point results need not be bitwise identical. Selection is
+also checked on the validation fixtures. A small timing example does not establish
+production-scale speed or scientific superiority.
+
+```{r}
+library(softridge)
+set.seed(1)
+n <- 60; p <- 300
+X <- matrix(rnorm(n * p), n, p)
+beta <- c(3, -2, 1.5, rep(0, p - 3))
+y <- drop(X %*% beta + rnorm(n))
+
+## Cross-validated fit
+cv <- cv_hr(X, y, nfolds = 5)
+cv$selected
+
+## Exact risk of the estimator for given tuning values
+Xs <- scale(X)
+hr_risk(Xs, beta * attr(Xs, "scaled:scale"), sigma = 1, k = 10, gamma = 0.05)$risk
+```
+
+## Training least-squares rescaling
+
+`cv_hr(X, y, scale = TRUE)` estimates a single nonnegative scale from each
+CV training set after thresholding. The final model repeats that operation
+on all training observations. The scale is
+`max(0, crossprod(Xs %*% theta_hat, yc) / sum((Xs %*% theta_hat)^2))`,
+where `Xs` and `yc` are the training-centered and, when requested, scaled
+design and centered response. A zero fitted vector receives scale one.
+Scaling is applied before coefficients are mapped to the original units;
+the intercept is recomputed. This option and `refit = TRUE` are alternatives.
+
+```{r scaled-example}
+set.seed(9)
+X_demo <- matrix(rnorm(24 * 36), 24)
+y_demo <- drop(X_demo[, 1:2] %*% c(2, -1) + rnorm(24))
+g_demo <- hr_grid(X_demo, y_demo, nk = 3, ng = 5)
+f_demo <- cv_hr(X_demo, y_demo, nfolds = 3, grid = g_demo, scale = TRUE)
+f_demo$scale
+head(predict(hr(X_demo, y_demo, f_demo$k, f_demo$gamma, scale = TRUE), X_demo))
+```
+
+`hr_risk(..., scale = c)` and `hr_sure(..., scale = c)` instead take a **fixed**
+positive numeric scale. The finite-sample formulas and degrees of freedom
+are valid for that fixed scale. They do not establish exact risk or SURE for
+a training-estimated scale or for parameters selected by CV/SURE.

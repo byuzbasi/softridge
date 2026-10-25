@@ -1,0 +1,22 @@
+{
+  "scenarios": 192,
+  "replications": 500,
+  "units": 96000,
+  "methods": ["SSTR-c0", "Ridge-c0", "STR", "SSTR (LS)", "Ridge", "LS-scaled Ridge", "Lasso", "ENet", "SCAD", "MCP", "HTR", "SHTR", "Oracle-OLS"],
+  "feasible_methods": 12,
+  "metrics": ["theta_loss", "PE", "MCC"],
+  "n": [100, 200],
+  "p_over_n": [2, 10],
+  "s": [8, 40],
+  "rho": [0.2, 0.5, 0.9],
+  "SNR": [0.05, 0.0990822583198135, 0.196345878275085, 0.389087860625652, 0.771034078312289, 1.52791595441435, 3.02778726572494, 6],
+  "CV_folds": 10,
+  "matched_control_ridge_penalties": 20,
+  "SSTR_threshold_candidates": 41,
+  "MCC_policy": "mltools::mcc() 0.3.5 native outputs; zero denominator returns zero",
+  "intervals": "paired descriptive 95% Monte Carlo intervals; unadjusted",
+  "Oracle": "reference only; excluded from winners and not a projection-risk lower bound",
+  "corrected_scale": "c0 = max(0, (yc transpose v - sigmahat2 df0) / squared norm of v); zero if v is zero",
+  "sigmahat2": "Training-subset tenfold CV-Lasso RSS / max(1, training size - selected slopes - 1); 11 variance estimates per replication",
+  "interpretation": "Plug-in optimism correction with response-adaptive scaling and tuning; no unconditional unbiasedness or risk-dominance guarantee"
+}

@@ -1,0 +1,5 @@
+bibentry(bibtype = "Manual",
+  title = "scaleCorrection: Optimism-Corrected Ridge Scaling",
+  author = c(person("Mohammad", "Arashi"), person("Bahadir", "Yuzbasi")),
+  year = "2026", note = "R package version 0.1.0; GitHub research software",
+  url = "https://github.com/byuzbasi/softridge")

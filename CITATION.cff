@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "Please cite the software versions used and the companion manuscript when appropriate."
+type: software
+title: "softridge and scaleCorrection: Soft-Thresholded Ridge Research Software"
+version: "softridge 0.3.0.1; scaleCorrection 0.1.0"
+date-released: 2026-10-25
+authors:
+  - family-names: Arashi
+    given-names: Mohammad
+  - family-names: Yuzbasi
+    given-names: Bahadir
+repository-code: "https://github.com/byuzbasi/softridge"
+url: "https://byuzbasi.github.io/softridge/"
+license: GPL-2.0-or-later

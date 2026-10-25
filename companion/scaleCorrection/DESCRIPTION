@@ -1,0 +1,21 @@
+Package: scaleCorrection
+Type: Package
+Title: Research Companion for Optimism-Corrected Ridge Scaling
+Version: 0.1.0
+Authors@R: c(person("Mohammad", "Arashi", email = "mohammad.arashi@up.ac.za",
+    role = c("aut", "cre")), person("Bahadir", "Yuzbasi", role = "aut"))
+Description: Additive research implementation of nonnegative optimism-corrected
+    scaling after soft thresholding of ridge coefficients. Reuses the frozen
+    softridge preprocessing and ridge engine. New scaling and prediction-score
+    kernels use RcppArmadillo. The plug-in correction is evaluated empirically;
+    it does not claim unbiased risk for an adaptively tuned estimator.
+License: GPL (>= 2)
+Encoding: UTF-8
+Imports: stats, Rcpp, softridge, glmnet, digest
+LinkingTo: Rcpp, RcppArmadillo
+SystemRequirements: C++17
+NeedsCompilation: yes
+Author: Mohammad Arashi [aut, cre], Bahadir Yuzbasi [aut]
+Maintainer: Mohammad Arashi <mohammad.arashi@up.ac.za>
+URL: https://byuzbasi.github.io/softridge/scaleCorrection/, https://github.com/byuzbasi/softridge
+BugReports: https://github.com/byuzbasi/softridge/issues

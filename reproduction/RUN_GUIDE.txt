@@ -1,0 +1,143 @@
+REPRODUCING THE NUMERICAL WORK
+=============================
+Run the commands below from the extracted software directory unless a
+different directory is stated. Paths are relative to the distributed files.
+RUNME.R resolves its own location, so the same folder can be moved without
+editing a source file. Numerical outputs must use new directories.
+
+1. Dependencies and study-specific installation
+-----------------------------------------------
+The reference study uses softridge 0.4.0. The independent study uses the
+RcppArmadillo softridge 0.3.0.1 engine and scaleCorrection 0.1.0 extension.
+The two softridge versions must not share a library. The commands install
+the supplied archives into separate .r-libraries/reference22/ and
+.r-libraries/independent192/ directories. They do not download dependencies.
+
+The recipient must first have R and the declared third-party dependencies:
+glmnet, ncvreg, digest and mltools; additionally Rcpp, RcppArmadillo and jsonlite
+for the independent study. Building the compiled packages requires a C++17
+toolchain compatible with R. All recorded versions are listed in SOFTWARE_VERSIONS.csv. No hdi installation
+is needed. Optional public riboflavin data are acquired by the explicit
+fetch_riboflavin.R command and checked against a pinned SHA-256 digest.
+Package names and original authorship are retained.
+
+From the directory containing the extracted software folder:
+
+  cd STR_SSTR_Software_Run_Code
+  Rscript --vanilla RUNME.R install --study reference22
+  Rscript --vanilla RUNME.R install --study independent192
+  Rscript --vanilla RUNME.R check --study reference22
+  Rscript --vanilla RUNME.R check --study independent192
+
+The check commands validate dependencies, source checksums, available
+real-data dimensions, scenario counts and tuning-grid sizes without fitting a model. With no
+arguments, RUNME.R displays help and performs no numerical work.
+
+2. Bounded examples
+-------------------
+From STR_SSTR_Software_Run_Code/:
+
+  Rscript --vanilla RUNME.R reference22 --smoke --output runs/reference_smoke_v1 --allow-version-differences
+  Rscript --vanilla RUNME.R independent192 --task ars_s001_r001 --workers 1 --output runs/independent_unit_v1 --allow-version-differences
+  Rscript --vanilla RUNME.R verify --study independent192 --output runs/independent_unit_v1
+
+The first example loads the reference simulation functions and checks one
+fixed-matrix fit. The second reproduces one recorded data/outer-fold seed,
+fits the ten original procedures, obtains the LS-scaled Ridge control from
+the stored LS-SSTR CV surface, and fits corrected SSTR and Ridge-c0 using
+the same 20-penalty/41-threshold grid. It validates all thirteen records.
+These bounded examples are software checks, not Monte Carlo evidence.
+
+Recorded R/dependency versions are checked before fitting. The explicit
+--allow-version-differences flag permits an independently recorded run in
+a different environment; it does not claim byte-identical published values.
+The supplied research-package versions themselves remain mandatory. All new
+numerical results are written to separate output directories.
+
+3. Complete independent study (explicit, potentially long computation)
+---------------------------------------------------------------------
+From STR_SSTR_Software_Run_Code/, in the recorded environment:
+
+  Rscript --vanilla RUNME.R independent192 --all --confirm-full --workers 2 --output runs/independent_full_v1
+
+This is 192 scenarios x 500 replications = 96000 work units, in the original
+task order. Each work unit fits all thirteen recorded procedures. One
+coordinating writer commits ten signature-checked packs. The number of
+workers may be chosen from 1 to 55; task-level data and fold streams are
+frozen independently of scheduling. The same worker count is required when
+resuming a run. Fitting and committed counts are reported separately every
+30 seconds and at phase transitions in stdout, progress.json and progress.tsv.
+ETA is measured for fitting only; final aggregation/verification is separate.
+No scheduler commands or machine-specific library paths are required.
+
+For the same run, in the same environment and from STR_SSTR_Software_Run_Code/:
+
+  Rscript --vanilla RUNME.R independent192 --all --confirm-full --workers 2 --output runs/independent_full_v1 --resume
+  Rscript --vanilla RUNME.R verify --study independent192 --output runs/independent_full_v1
+
+Verified completed packs are reused. An interrupted uncommitted pack may
+require recomputation. Existing output directories require --resume and an
+identical signature. Verification checks every pack, unit identity, metric
+dimension and size/SHA-256 record. A completion marker alone is insufficient.
+Source files, dependency versions and worker count contribute to the signature.
+An output lock is retained after an abnormal process kill; confirm that the
+old process is inactive before manually resolving such a lock.
+
+Expected artifacts: definition.rds, ten part_*.rds packs, pack_manifest.csv,
+metrics.rds/metrics.csv, final_manifest.csv, progress.json, progress.tsv and
+COMPLETED. Oracle-OLS is excluded from feasible winners and PE
+ratio denominators. Native mltools::mcc is used for beta support, including
+its zero value for a zero denominator. Projection loss, PE and MCC remain
+separate targets. Failed solver checks stop the unit/run and retain prior
+packs; they are not silently omitted or assigned successful performance.
+
+The portable full run has not been executed or timed end to end. Its exact
+wall time and storage are unknown and depend on the machine, versions and
+scenario costs. Inspect a bounded example before choosing a full rerun.
+
+4. Complete reference study and batch-wise real data
+---------------------------------------------------
+From STR_SSTR_Software_Run_Code/, in the recorded environment:
+
+  Rscript --vanilla fetch_riboflavin.R
+  Rscript --vanilla RUNME.R reference22 --all --confirm-full --studies 2,4,5 --real-data --output runs/reference_full_v1
+
+Studies 2, 4 and 5 are the 22 reference settings, with 100 replications per
+setting. The reference functions retain their original two fork-worker RNG
+streams. Their 12-penalty/40-absolute-threshold CV differs from the independent
+study's fold-local threshold grid. The real-data script keeps whole batches
+together in all 100 train/test splits and seven-fold CV. Results are written
+under runs/reference_full_v1/work/results/ and figures under work/figures/.
+Resume uses the original completed-scenario caches, rather than the independent study's ten-pack
+writer; incomplete or corrupt cache files must not be treated as valid.
+
+To rerun the same requested stages from STR_SSTR_Software_Run_Code/:
+
+  Rscript --vanilla RUNME.R reference22 --all --confirm-full --studies 2,4,5 --real-data --output runs/reference_full_v1 --resume
+
+Study 1 is the separate 20000-replication fixed-design risk illustration;
+Study 3 is the original timing experiment. They are available via --studies
+1 or --studies 3 with the explicit full-run flags. Neither is launched by
+the default 22-setting command. The backing timing records were not supplied,
+so this source is not evidence that the published timing figure was rebuilt.
+
+The frozen fork-worker helpers require macOS or Linux. For Windows use a
+Linux environment such as WSL. Native Windows numerical execution has not
+been validated. Local software checks do not replace a full cross-platform
+reproduction study.
+
+The real-data download is optional for simulation-only commands; omit
+--real-data when running only the 22 simulation settings. The downloader
+retains existing files and refuses a different SHA-256. No raw data are bundled.
+
+5. Integrity check before installation
+--------------------------------------
+From STR_SSTR_Software_Run_Code/:
+
+  python3 verify_sources.py
+
+The verifier checks every delivered file using size and SHA-256. Added run,
+library and downloaded-data files are outside this source manifest; raw data
+are separately validated by the pinned digest before real-data execution.
+These commands support reproduction; no new production run is needed to read
+or evaluate the reported manuscript results.

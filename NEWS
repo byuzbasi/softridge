@@ -1,0 +1,9 @@
+softridge 0.2.0
+
+- Implements the numerical core in RcppArmadillo: thin SVD, ridge paths,
+  thresholding, coefficient arrays, exact Gaussian risk, SURE, and CV/refit scores.
+- Preserves R interfaces, fold-local preprocessing, singular-value cutoff,
+  candidate grids, and column-order tie handling.
+- Native kernels do not consume RNG draws and do not use OpenMP.
+- The surrounding research workflow separately records the predeclared
+  HR-SURE undefined-variance event; this is not a new variance estimator.

@@ -2,7 +2,7 @@
 
 Corrected SSTR applies a nonnegative optimism correction to the LS
 scale.
-[`corrected_pair()`](https://rdrr.io/pkg/scaleCorrection/man/corrected_pair.html)
+[`corrected_pair()`](https://byuzbasi.github.io/softridge/scaleCorrection//reference/corrected_pair.html)
 selects a thresholded fit and the zero-threshold Ridge control on the
 same outer folds and ridge penalties. This control isolates the
 empirical contribution of thresholding within the scaled family.

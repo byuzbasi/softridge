@@ -9,3 +9,5 @@ pre { border: 1px solid #dbe8e5; border-radius: .6rem; }
 .table { font-size: .95rem; }
 footer { border-top: 1px solid #dbe8e5; }
 @media(max-width:600px) { main h1 { font-size: 2rem; } pre { font-size: .78rem; } }
+
+@media(max-width:600px) { .page-header img.logo { display:none; } main { hyphens:none; } main h1 { font-size:1.85rem; line-height:1.2; } }

@@ -22,7 +22,7 @@ alongside a matched Ridge-c0 control. Numerical kernels use **RcppArmadillo**.
 The manuscript calls the estimators **STR** and **SSTR**. Historical function
 names such as `hr()` are retained for compatibility. `scale = TRUE` in
 `hr()` or `cv_hr()` requests the earlier training LS scale (**SSTR-LS**);
-the corrected SSTR is obtained from `scaleCorrection::corrected_pair()`.
+the corrected SSTR is obtained from [`scaleCorrection::corrected_pair()`](https://byuzbasi.github.io/softridge/scaleCorrection/reference/corrected_pair.html).
 
 ## Install from GitHub
 

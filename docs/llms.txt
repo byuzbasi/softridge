@@ -33,7 +33,7 @@ retained for compatibility. `scale = TRUE` in
 [`cv_hr()`](https://byuzbasi.github.io/softridge/reference/cv_hr.md)
 requests the earlier training LS scale (**SSTR-LS**); the corrected SSTR
 is obtained from
-[`scaleCorrection::corrected_pair()`](https://rdrr.io/pkg/scaleCorrection/man/corrected_pair.html).
+[`scaleCorrection::corrected_pair()`](https://byuzbasi.github.io/softridge/scaleCorrection/reference/corrected_pair.html).
 
 ## Install from GitHub
 

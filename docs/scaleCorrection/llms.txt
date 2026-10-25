@@ -19,7 +19,7 @@ guide](https://byuzbasi.github.io/softridge/articles/getting-started.html),
 [worked scaling
 example](https://byuzbasi.github.io/softridge/articles/scaling.html),
 and [function
-reference](https://byuzbasi.github.io/softridge/scaleCorrection/reference/index.md).
+reference](https://byuzbasi.github.io/softridge/scaleCorrection/reference/index.html).
 
 ## Corrected scale and matched control
 

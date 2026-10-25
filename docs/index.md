@@ -96,7 +96,7 @@ unbiasedness formulas do not extend automatically to them.
 
 ## Reproduction materials
 
-[`reproduction/`](https://byuzbasi.github.io/softridge/reproduction/)
+[`reproduction/`](https://github.com/byuzbasi/softridge/tree/main/reproduction)
 contains source packages, frozen designs/seeds and portable runners for
 the separately reported **22-setting reference study** and
 **192-scenario independent study**. The reference uses the original R
@@ -119,8 +119,8 @@ repository.
 ## Citation and authorship
 
 Software: Mohammad Arashi and Bahadir Yuzbasi. See
-[`CITATION.cff`](https://byuzbasi.github.io/softridge/CITATION.cff) and
-`citation("softridge")` / `citation("scaleCorrection")`.
+[`CITATION.cff`](https://github.com/byuzbasi/softridge/blob/main/CITATION.cff)
+and `citation("softridge")` / `citation("scaleCorrection")`.
 
 Companion manuscript: Bahadir Yuzbasi and Mohammad Arashi,
 *Soft-thresholded ridge estimation of an estimable projection*,
@@ -130,7 +130,8 @@ unpublished manuscript (2026). No journal acceptance or DOI is claimed.
 
 See [VALIDATION.md](https://byuzbasi.github.io/softridge/VALIDATION.md),
 [CONTRIBUTING.md](https://byuzbasi.github.io/softridge/CONTRIBUTING.md),
-and [release notes](https://byuzbasi.github.io/softridge/NEWS.md).
-Report reproducible problems through [GitHub
+and [release
+notes](https://byuzbasi.github.io/softridge/news/index.html). Report
+reproducible problems through [GitHub
 issues](https://github.com/byuzbasi/softridge/issues). Both packages use
 GPL (\>= 2); original authorship is preserved.

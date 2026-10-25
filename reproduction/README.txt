@@ -21,4 +21,7 @@ numerical execution occurs merely by opening this archive.
 Run python3 verify_sources.py after extraction. Source archives and scientific
 functions are unchanged from the complete submission bundle. Only the run
 adapters make the optional real-data file an explicit, checksum-pinned download.
-No public repository URL or software DOI is asserted for these research engines.
+Public source and documentation:
+https://github.com/byuzbasi/softridge
+https://byuzbasi.github.io/softridge/
+No software DOI or CRAN publication is claimed.
